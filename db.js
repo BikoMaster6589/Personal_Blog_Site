@@ -10,9 +10,7 @@ const db = new Client({
   database: process.env.DATABASE,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_POST,
-  ssl: {
-    rejectUnauthorized: false // Set to true if you want to reject self-signed certificates
-  }
+  ssl: false
 });
 
 db.connect();
