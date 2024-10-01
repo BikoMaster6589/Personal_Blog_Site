@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs') %>
+
+<title>Edit Post</title>
+<link rel="stylesheet" href="/styles/main_edit.css"/>
+<link rel="stylesheet" href="/styles/add_edit.css"/>
+
+<div class="Main">
+    <div class="heading">
+        <h1>Edit Post</h1>
+    </div>
+
+    <div class="mainPosts">
+        <form action="/edit/<%= Postid %>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PATCH">  <!-- This tells the server to treat it as a PATCH request -->
+            <div class="df Heading">
+                <label for="heading">Heading:</label>
+                <input type="text" name="heading" required value="<%= post.heading %>">
+            </div>
+            <div class="df" id="content">
+                <label for="content">Content:</label>
+                <textarea name="content" id="content" required><%= post.content %></textarea>
+            </div>
+            <div class="df" id="name">
+                <label for="name">Name:</label>
+                <input type="text" name="name" required value="<%= post.username %>">
+            </div>
+            <div class="df" id="image">
+                <label for="image">Image:</label>
+                <input type="file" name="image">
+            </div>
+            <div id="buttons">
+                <button type="submit">Edit Post</button>
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

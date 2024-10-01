@@ -1,0 +1,73 @@
+<%- include('partials/header.ejs') %>
+
+<title>Signup_Section</title>
+<link rel="stylesheet" href="/styles/main_edit.css"/>
+<link rel="stylesheet" href="/styles/add_edit.css">
+
+
+<div class="Main">
+    <div class="heading">
+        <h1>Add Post</h1>
+    </div>
+
+
+
+    <div class="mainPosts">
+<form action="/adding" method="post" enctype="multipart/form-data">
+
+    <div class=" df Heading">
+        <label for="heading">Heading:</label>
+        <input type="text" required name="head" placeholder="Enter Your Heading">
+    </div>
+    <div class="df" id="content">
+        <label for="content">Content:</label>
+        <textarea name="feed" id="" placeholder="Enter Your Content" ></textarea>
+    </div>
+    <div class="df" id="name">
+        <% if(locals.fs && locals.ln){ %>
+        <label for="name">Name:</label>
+        <input type="text" required value="<%= fs %> <%= ln %>">
+        <% } else{ %>
+            <label for="name">Name:</label>
+        <input type="text" required value="Enter Your Name">
+            <% } %>
+    </div>
+    <div class="df" id="name">
+        <label for="name">Image:</label>
+        <input type="file" required name="image" value="Bikram Singh bisht">
+    </div>
+    <div id="buttons">
+        <button type="submit">+ Add Post</button>
+    </div>
+</form>
+
+    </div>
+</div>
+
+
+
+<%- include('partials/footer.ejs') %>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Check if postAdded query parameter is present
+    const urlParams = new URLSearchParams(window.location.search);
+    const postAdded = urlParams.get('postAdded');
+
+    if (postAdded === 'true') {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Your post has been added.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (postAdded === 'false') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was an error adding your post. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+</script>

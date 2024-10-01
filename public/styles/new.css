@@ -1,0 +1,101 @@
+
+.heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-family: merriweather;
+    margin: 1.5rem 0;
+}
+
+.heading h3{
+    color: var(--secondaryTextColor);
+    font-weight: 400;
+    
+}
+
+
+
+.posts{
+    display: flex; 
+    padding: 0.5rem 1rem;
+    gap: 3rem;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    margin-bottom: 3rem;
+ 
+ }
+ 
+ 
+ .card{
+     width: 20%;
+     flex-basis: 31%;
+     background-color: var(--secondaryBgColor);
+     box-shadow: 0px 4px 37.2px 0px rgba(0, 0, 0, 0.25);
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+     padding: 0.2rem;
+     padding-bottom: 1rem;
+     justify-content: space-between;
+ }
+ 
+ 
+ .card img{
+     width: 100%;
+     height: 59%;
+ }
+ 
+ .buttons{
+     display: flex;
+     justify-content: space-between;
+     padding-right: 1.2rem;
+     margin-top: 1rem;
+     
+ }
+ 
+ .buttons a{
+    display: flex;
+    background-color: red;
+    padding: 0.5rem 1rem;
+    color: white;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-family: poppin;
+    border-radius: 0.3rem;
+    align-items: center;
+ }
+
+ .buttons a:first-child{
+    background-color: var(--primaryColor);
+ }
+ 
+ .card h2{
+     text-align: center;
+ }
+ 
+
+ .errorMsg{
+    font-family: merriweather;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.6rem;
+    color: var(--secondaryTextColor);
+ }
+
+ #buttons a{
+    background-color: var(--primaryColor);
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.2rem;
+    border: none;
+    
+}

@@ -1,0 +1,62 @@
+.Main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    font-family: poppin;
+   
+}
+
+.heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: var(--secondaryTextColor);
+}
+.heading h1{
+font-size: 3.5rem;
+color: var(--primaryColor);
+}
+
+.body{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.body .left{
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.body .left p{
+    font-size: 1.5rem;
+    color: #003049;
+}
+
+.body .left .Buttons{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.body .left .Buttons a{
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--primaryColor);
+    color: white;
+}
+
+
+.text h3{
+    text-align: center;
+}

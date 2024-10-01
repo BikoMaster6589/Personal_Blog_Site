@@ -1,0 +1,101 @@
+<%- include('partials/header.ejs') %>
+
+<title>My Posts</title>
+<link rel="stylesheet" href="/styles/new.css"/>
+<link rel="stylesheet" href="/styles/common.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section class="Navbar">
+    <div class="logo">
+        <h1>PERSONAL BLOG</h1>
+    </div>
+    <div class="lists">
+        <ul>
+            <li><a href="/">Home</a> </li>
+            <li><a href="/posts">Posts</a> </li>
+            <li><a href="/contact">Contacts</a> </li>
+            <li><a id="unique" href="#">Feedback</a> </li>
+        </ul>
+    </div>
+
+    
+    <div class="buttons">
+        <a href="/add">Create post</a>
+        <img class="profile" src="https://media.istockphoto.com/id/1303206558/photo/headshot-portrait-of-smiling-businessman-talk-on-video-call.webp?b=1&s=612x612&w=0&k=20&c=BfKt5wcfqbh4RrzdNvXM4rK0LIDLQ6q5qpoJZA9ucuk=" alt="Profile Image" id="pop">
+
+        <div class="newl">
+            <h1><%= user.first_name%> <%= user.last_name%></h1>
+            <h3><%= user.username %></h3>
+            <form action="" method="post">
+                <a href="/userposts">Posts</a>
+                <a href="/logout" type="button">Logout</a>
+            </form>
+        </div>
+
+    </div>
+</section>
+<hr id="NavbarHr">
+
+
+
+
+
+<div class="Main">
+<div class="heading">
+    <h1>My Posts</h1>
+    <h3>You can Update and Delete Your Posts Posts Here</h3>
+</div>
+
+
+<div class="posts">
+    <% if (values && values.length > 0 && locals.user) { %> 
+        <% values.forEach(e => { %>   <!-- Directly iterate over 'values' -->
+            <div class="card">
+                <img src="/images/uploads/<%= e.image %>" alt="Image not found">
+                <h2><%= e.heading %></h2>
+                <p><%= e.content %></p>
+                <div class="buttons">         
+                    <a href="/edit/<%= e.id %>">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <p>Edit</p>
+                    </a>
+                    <a href="/delete/<%= e.id %>">
+                        <i class="fa-solid fa-trash"></i>
+                        <p>Delete</p>
+                    </a>
+                   </div>
+            </div>
+        <% }) %>
+        
+    <% } else { %>
+        <div class="errorMsg">
+            <h1>No posts Avalilabe Please click on Add Post to make a New Post</h1>
+            <div id="buttons">
+                <a href="/add">+ Add Post</a>
+            </div>
+        </div>
+
+    <% } %>
+
+
+</div>
+  
+  
+  
+ </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script src="/styles/index.js"></script>
+<%- include('partials/footer.ejs') %>
+
+
+

@@ -1,0 +1,83 @@
+.Main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.heading{
+    margin: 1.3rem;
+    font-family: merriweather;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.mainPosts{
+    background-color: var(--secondaryBgColor);
+    min-height: calc(100vh - 12vh);
+    width: 80%;
+    margin: auto;
+    box-shadow: 3px 4px 44.2px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    margin: 1rem 0;
+
+}
+
+.mainPosts form{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+    align-items: end;
+    justify-content: center;
+  
+
+}
+
+.df{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    font-size: 1.5rem;
+    font-family: merriweather;
+    width: 100%;
+    gap: 1rem;
+}
+
+.df label{
+    font-family: merriweather;
+}
+
+#content{
+    align-items: flex-start;
+}
+
+.df input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    
+}
+
+#name {
+    gap: 2.5rem;
+}
+
+.df textarea {
+    width: 100%;
+    height: 50vh;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+#buttons button{
+    background-color: var(--primaryColor);
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.2rem;
+    border: none;
+    
+}

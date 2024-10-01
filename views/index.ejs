@@ -1,0 +1,251 @@
+<%- include('partials/header.ejs') %>
+
+<title>Personal Blog</title>
+<link rel="stylesheet" href="/styles/main_edit.css"/>
+<link rel="stylesheet" href="/styles/home.css"/>
+
+<div class="main">
+    <section class="Navbar">
+        <div class="logo">
+            <h1>PERSONAL BLOG</h1>
+        </div>
+        <div class="lists">
+            <ul>
+                <li><a href="/">Home</a> </li>
+                <li><a href="/posts">Posts</a> </li>
+                <li><a href="/contact">Contacts</a> </li>
+                <li><a id="unique" href="#feed">Feedback</a> </li>
+            </ul>
+        </div>
+        
+        <div class="buttons">
+            <a href="/add">Create post</a>
+            <img class="profile" src="/images/User-Profile-PNG-High-Quality-Image.png" alt="Profile Image" id="pop">
+
+            <div class="newl">
+                <h1><%= user.first_name%> <%= user.last_name%></h1>
+                <% if(adm == 1){ %>
+                    <p id="Status">ADMIN</p>
+                    <% } else { %>
+                        <p>Member</p>
+                        <% } %>
+                <h3><%= user.username %></h3>
+                <form action="" method="post">
+                    <a href="/userposts">Posts</a>
+                    <a href="/logout" type="button">Logout</a>
+                </form>
+            </div>
+
+        </div>
+    </section>
+    
+    <hr id="NavbarHr">
+
+    <section class="homePage">
+        <h2 class="h2">Latest Posts</h2>
+        <div class="posts">
+            <div class="latestPost">
+                <% if (locals.values && values.length > 0) { %>
+                    <% const latestPost = values[values.length - 1]; %>
+                    <div class="imgcard">
+                        <img src="/images/uploads/<%= latestPost.image %>" alt="Image not found">
+                    </div>
+                    <div class="content">
+                        <h3>About <span><%= latestPost.heading || "Untitled" %></span></h3>
+                        <p><%= latestPost.content || "No content available" %></p>
+                        <div class="dateetc">
+                            <p>Created by: <span><%= latestPost.username %></span></p>
+                            <% const dateStr = new Date(new Date(latestPost.created_at).setDate(new Date(latestPost.created_at).getDate() + 1)).toISOString().substring(0, 10); %>
+                            <p>Date: <span><%= dateStr %></span></p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="errorMsg">
+                        <h1>Join us and post first!</h1>
+                    </div>
+                <% } %>
+            </div>
+    
+            <div class="latestPost2">
+                <% for (let i = 1; i < 4; i++) { %>
+                    <% if (locals.values && values.length > i) { %>
+                        <% const post = values[values.length - (i + 1)]; %>
+                        <div class="Card">
+                            <img src="/images/uploads/<%= post.image %>" alt="Image not found">
+                            <div class="content">
+                                <h2>About <span><%= post.heading || "Untitled" %></span></h2>
+                                <p><%= post.content || "No content available" %></p>
+                                <div class="dateetc">
+                                    <p>Created by: <span><%= post.username || "Unknown" %></span></p>
+                                    <% const dateStr = new Date(new Date(post.created_at).setDate(new Date(post.created_at).getDate() + 1)).toISOString().substring(0, 10); %>
+                                    <p>Date: <span><%= dateStr %></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="allPosts">
+        <h2 class="h2">All Posts</h2>
+        <div class="posts">
+            <% if (locals.values && values.length > 0) { %>
+                <div class="posts-1">
+                    <% for (let i = 0; i < Math.min(3, values.length); i++) { %>
+                        <div class="card">
+                            <img src="/images/uploads/<%= values[i].image %>" alt="Image not found">
+                            <h2><%= values[i].heading || "Untitled" %></h2>
+                            <p><%= values[i].content.substring(0, 100) || "No content available" %>...</p>
+                            <div class="dateetc">
+                                <p>Created by: <a href=""><%= values[i].username || "Unknown" %></a></p>
+                                <% const dateStr = values[i].created_at.toISOString().substring(0, 10); %>
+                                <p>Date: <span><%= dateStr %></span></p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>    
+
+                <div class="posts-2">
+                    <% for (let i = 3; i < Math.min(6, values.length); i++) { %>
+                        <div class="card">
+                            <img src="/images/uploads/<%= values[i].image %>" alt="Image not found">
+                            <h2><%= values[i].heading || "Untitled" %></h2>
+                            <p><%= values[i].content.substring(0, 100) || "No content available" %>...</p>
+                            <div class="dateetc">
+                                <p>Created by: <a href=""><%= values[i].username || "Unknown" %></a></p>
+                                <% const dateStr = values[i].created_at.toISOString().substring(0, 10); %>
+                            <p>Date: <span><%= dateStr %></span></p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="errorMsg">
+                    <h1>No posts Yet .. 😟</h1>
+                </div>
+            <% } %>
+
+            <div class="Sap">
+                <a href="/posts">See all Posts <img src="/images/Arrow 3.png" alt=""></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="feedback" id="feed">
+        <h2 class="h2">Feedback</h2>
+        <form action="/feedback" method="POST">
+            <textarea name="feed" placeholder="Enter Your valuable Feedback"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <div class="footer">
+        <div class="personal">
+            <h1>PERSONAL BLOG</h1>
+            <p>This is a Blog Website made to share your thoughts. Explore its many features.</p>
+        </div>
+        <div class="navigations">
+            <div class="nav">
+                <ul>
+                    <li class="special">Navigation</li>
+                    <li><a href="/">Home</a> </li>
+                    <li><a href="/posts">Post</a> </li>
+                    <li><a href="/contact">Contact</a> </li>
+                    <li><a href="#feed" id="uni">Feedback</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sprt">
+            <ul>
+                <li class="special">Support</li>
+                <li><a href="#">Help</a> </li>
+                <li><a href="#">Support</a> </li>
+                <li><a href="#">Contact</a> </li>
+                <li><a href="#" id="u">FAQ</a> </li>
+            </ul>
+        </div>
+        <div class="kya">
+            <h2 class="special">Know Your Admin</h2>
+            <div class="logos">
+                <a href="#">
+                    <img src="/images/profile.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="/images/instagram.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="/images/GitHub.png" alt="">
+                </a>
+            </div>
+            <div class="sprt">
+                <ul>
+                    <li><a href="www.instagram.com">Instagram</a></li>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  // Check if feedback was submitted successfully
+  const urlParams = new URLSearchParams(window.location.search);
+  const feedbackSubmitted = urlParams.get('feedbackSubmitted');
+  const postAdded = urlParams.get('postAdded');
+
+
+  if (typeof postAdded !== 'undefined'&& postAdded === 'true') {
+    Swal.fire({
+        position: "top",
+      title: 'Success!',
+      text: 'Your post has been added successfully.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      // Remove the query parameter from the URL after displaying the alert
+      if (window.history.replaceState) {
+        const url = new URL(window.location);
+        url.searchParams.delete('postAdded');
+        window.history.replaceState(null, '', url);
+      }
+    });
+  
+  } else if (typeof postAdded !== 'undefined' && postAdded === 'false') {
+    Swal.fire({
+      title: 'Error!',
+      text: 'There was an error adding your post. Please try again.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+
+
+
+  if (feedbackSubmitted === 'true') {
+    Swal.fire({
+        position: "top",
+      title: 'Success!',
+      text: 'Your feedback has been submitted.',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  } else if (feedbackSubmitted === 'false') {
+    Swal.fire({
+      title: 'Error!',
+      text: 'There was an error submitting your feedback. Please try again.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+</script>
+
+<script src="/styles/index.js"></script>
+<%- include('partials/footer.ejs') %>

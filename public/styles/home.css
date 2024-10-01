@@ -1,0 +1,531 @@
+.main{
+width: 100%;
+margin: auto;
+font-size: 10px;
+}
+
+.Navbar{
+   display: flex;
+   width: 96%;
+   margin: auto;
+   justify-content: space-between;
+   align-items: center;
+   /* background-color: green; */
+   padding: 1.2rem 0;
+   
+}
+
+.Navbar .logo {
+    font-size: 1.2rem;
+    font-family: gallery;
+    letter-spacing: 0.05rem;
+}
+
+.Navbar .lists ul{
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-size: 1.2rem;
+gap: 1.2rem;
+}
+
+
+.Navbar .lists ul li a{
+    text-transform: uppercase;
+    color: black;
+    font-weight: 500;
+    font-family: crimsonText;
+    
+}
+
+#unique , #uni, #u{
+    color: var(--primaryColor);
+    font-weight: 500;
+}
+
+#unique:hover{
+    color: black;
+}
+
+.Navbar .lists ul li::after{
+    content: " ";
+    position: absolute;
+    bottom: -0.1rem;
+    left: 0;
+    height: 0.3vh;
+    transition: all 0.5s;
+    /* margin: 0 0.5rem; */
+    gap: 1rem;
+    width: 0%;
+    /* z-index: -1; */
+    background-color: var(--primaryColor);
+}
+
+.Navbar .lists ul li:hover::after{
+    width: 100%;
+}
+
+
+
+.Navbar .buttons{
+display: flex;
+align-items: center;
+font-size: 1rem;
+gap: 1.5rem;
+font-size: 1.1rem;
+position: relative;
+font-family: poppin;
+padding-left: 1.2rem;
+flex-basis: 16%;
+}
+
+.Navbar .buttons a{
+    border: 1px solid black;
+    padding: 0.5rem .5rem;
+    background-color: var(--primaryColor);
+   
+    color: white;
+    border-radius: 0.3rem;
+}
+
+.Navbar .profile{
+    border-radius: 50%;
+    border: 1px solid black;
+    height: 5.5vh;
+    width: 22%;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.newl{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    background-color: var(--secondaryBgColor);
+    height: 24vh;
+    width: 100%;
+    position: absolute;
+    color: black;
+    top: 4rem;
+    padding: 0.5rem ;
+    display: none;
+    overflow-wrap: anywhere;
+    z-index: 10;
+    right: 0;
+}
+
+#Status{
+    font-family: 'poppin';
+    font-size: 0.9rem;
+    padding-bottom: 1rem;
+    color: var;
+    color: var(--primaryColor);
+}
+
+
+.newl h1{
+    font-size: 1.5rem;
+}
+
+.newl h3{
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.newl form{
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+
+}
+
+.newl form a{
+    font-size: 1rem;
+    cursor: pointer;
+  
+   
+}
+
+
+
+#NavbarHr{
+background-color: black;
+height: 0.15rem;
+}
+
+
+
+
+/* Home_Page  ------------------------------------------ */ 
+
+
+.homePage , .allPosts , .feedback{
+    width: 96%;
+    margin: 6rem auto;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    /* position: relative; */
+}
+
+.h2{
+    font-size: 2rem;
+    font-family: merriweather;
+    position: relative;
+}
+
+ .h2::after{
+    content: " ";
+    position: absolute;
+    width: 8%;
+    height: 11%;
+    bottom: -0.5rem;
+    background-color: var(--primaryColor);
+    left: 0;
+}
+
+
+
+.homePage .posts{
+    display: flex;
+    gap: 3rem;
+    width: 100%;
+    height: 100%;
+}
+
+.homePage .posts .latestPost{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+   width: 60%;
+    border: 2px solid black;
+ --secondaryBgColor : #F2F2F2;
+ justify-content: center;
+ background-color: var(--secondaryBgColor);
+}
+
+.latestPost .imgcard{
+    height: 66%;
+}
+.latestPost .imgcard img{
+    width: 100%;
+    height: 100%;
+}
+
+.latestPost .content{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0.8rem;
+    
+}
+
+.latestPost .content h3{
+font-size: 1.5rem;
+font-weight: 400;
+font-family:village;
+letter-spacing: 0.1rem;
+}
+
+
+
+.latestPost .content p{
+font-size: 1rem;
+font-family: poppin;
+color: var(--secondaryTextColor);
+}
+
+.latestPost .content .dateetc{
+display: flex;
+justify-content: space-between;
+padding-right: 1.2rem;
+margin-top: 1rem;
+}
+
+.latestPost .dateetc p{
+    color: black;
+    font-size: 1.1rem;
+}
+
+
+.latestPost2{
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    flex-basis: 50%;
+    justify-content: space-between;
+}
+
+.latestPost2 .Card{
+    display: flex;
+    gap: 1.2rem;
+    /* flex-direction: column; */
+   
+}
+
+.latestPost2 .Card img{
+    width: 40%;
+
+}
+
+.latestPost2 .Card .content{
+    font-family: poppin;
+}
+
+.latestPost2 .Card .content h2{
+    font-size: 1.5rem;
+font-weight: 400;
+font-family:village;
+letter-spacing: 0.1rem;
+}
+
+.latestPost2 .Card .content p{
+    font-size: 0.7rem;
+}
+
+
+.latestPost2 .Card  .dateetc{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1.2rem;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    }
+    
+.latestPost .Card .dateetc p{
+    color: black;
+    font-size: 1.5rem;
+}
+
+
+
+.allPosts .posts{
+    display: flex;
+    flex-direction: column;
+    gap: 4.2rem;
+}
+
+
+
+.allPosts .posts-1 , .allPosts .posts-2{
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 2rem;
+    /* align-items: center; */
+    
+}
+
+.allPosts .posts-1 .card , .allPosts .posts-2 .card{
+    flex-basis: 31%;
+    background-color: var(--secondaryBgColor);
+    box-shadow: 0px 4px 37.2px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;   
+}
+.allPosts .posts-1 .card img , .allPosts .posts-2 .card img{
+    width: 100%;
+    height: 60%;
+}
+
+.card h2{
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    font-family: playfair;
+    letter-spacing: 0.1rem;
+}
+
+.card p{
+
+    font-size: 1rem;
+    font-family: poppin;
+    padding: 0.3rem 0.5rem;
+    color: var(--secondaryTextColor);
+    letter-spacing: 0.1rem;
+}
+
+.card .dateetc{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.card .dateetc p{
+    color: black;
+}
+.card .dateetc a{
+    color: var(--primaryColor);
+}
+
+.Sap a {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.Sap a{
+    font-family: poppin;
+    color: black;
+    font-size: 1.5rem;
+    transition: none;
+}
+
+
+
+.feedback{
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    margin-bottom: 2.2rem;
+}
+
+.feedback form textarea{
+    width: 100%;
+   height: 34vh;
+   padding: 0.5rem 1rem;
+   font-family: poppin;
+   font-size: 1rem;
+   background-color: var(--bgColor);
+   border: 2px solid black;
+
+}
+
+.feedback form button{
+    background-color: var(--primaryColor);
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: white;
+}
+
+.footer{
+    background-color: var(--secondaryBgColor);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    box-shadow: 2px -2px 22.5px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.personal{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-basis: 20%;
+}
+
+.personal h1{
+    font-size: 2rem;
+    font-family: gallery;
+    letter-spacing: 0.1rem;
+}
+.personal p{
+    font-size: 0.9rem;
+    font-family: poppin;
+    color: var(--secondaryTextColor);
+}
+
+
+
+.nav ul ,.sprt ul{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.nav ul li a , .sprt ul li a{
+    font-size: 1.2rem;
+    color: var(--secondaryTextColor);
+    font-family: crimsonText;
+}
+
+.logos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kya{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.logos a{
+    background-color: var(--iconBgColor);
+    border-radius: 50%;
+    padding: .5rem;
+}
+
+.logos a:hover{
+    background-color: var(--primaryColor);
+}
+
+.logos a img{
+    width: 100%;
+}
+
+.button button{
+    font-family: poppin;
+    letter-spacing: 0.12rem;
+    padding: 0.5rem 1rem ;
+    background-color: var(--primaryColor);
+    color: white;
+    font-size: 1rem;
+}
+
+
+.special{
+    font-size: 1.5rem;
+    font-family: gallery;
+    font-weight: 600;
+    -webkit-text-stroke-color: #000;
+}
+
+
+/* home.css */
+
+.short-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+}
+
+.full-content {
+    display: none;
+}
+
+.read-more-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.read-more-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.errorMsg{
+    background-color: white;
+    width: 100%;
+    font-size: 1.8rem;
+    text-align: center;
+    font-family: poppin;
+    color: var(--secondaryTextColor);
+}

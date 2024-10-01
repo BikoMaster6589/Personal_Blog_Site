@@ -1,0 +1,267 @@
+.Main{
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 8rem;
+margin: 1.5rem 0;
+
+}
+
+.heading{
+text-align: center;
+font-family: village;
+letter-spacing: 0.1rem;
+font-weight: 500;
+position: relative;
+}
+
+
+
+.heading h1::after{
+    content: "";
+    height: 10%;
+    width: 9%;
+    background-color: var(--primaryColor);
+    position: absolute;
+    bottom: -0.2vw;
+    left: 45.6vw;
+}
+.Main_Content{
+    display: flex;
+    width: 87%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    margin: auto;
+}
+
+
+#fpMain{
+    margin-top: 3rem;
+    align-items: flex-start;
+}
+
+.forms{
+    font-family: poppin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+
+#Jk{
+    width: 80%;
+}
+
+.forms h3:first-child{
+    color: var(--secondaryTextColor);
+    letter-spacing: 0.05rem;
+    /* font-weight: 400; */
+    margin-bottom: 0.5rem;
+}
+
+.forms h2{
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.forms p{
+    font-size: 0.9rem;
+    color: var(--secondaryTextColor);
+}
+
+.forms p a{
+    color: var(--primaryColor);
+}
+
+.forms form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.forms .naming{
+    display: flex;
+    gap: 3rem;
+}
+
+
+#signinBtn{
+    width: 15%;
+    
+}
+
+#fpbtn{
+    width: 100%;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.forms form input{
+    padding: 1.1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--BgColor);
+}
+
+.forms form button{
+    width: 33%;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    background-color: var(--primaryColor);
+    color: white;
+    font-family: poppin;
+    border-radius: 0.3rem;
+}
+
+
+
+#ui{
+    font-size: .8rem;
+    width: 100%;
+    font-family: poppin;
+    position: relative;
+    font-weight: 500;
+    text-align: center;
+    
+}
+
+#ui::before{
+    content: "";
+    height: 1%;
+    width: 37%;
+    background-color: black;
+    position: absolute;
+    top: 0.7vw;
+    left: 0;
+
+}
+
+#ui::after{
+    content: "";
+    height: 1%;
+    width: 37%;
+    background-color: black;
+    position: absolute;
+    top: 0.7vw;
+    right: 0.7vw;
+}
+
+
+.forms #ub{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    text-align: center;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--primaryColor);
+    background-color: var(--BgColor);
+    color: var(--primaryColor);
+
+    gap: 0.8rem;
+}
+
+ #goog{
+    width: 25%;
+    /* height: 10%; */
+}
+
+.forms button h3{
+    font-size: 1.2rem;
+    font-family: poppin;
+    color: var(--primaryColor);
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    font-family: poppin;
+    align-items: center;
+    width: 82vh;
+    position: relative;
+    height: 74vh;
+    border-radius: 1rem;
+    background: linear-gradient(rgba(1, 1, 1, 0.3), rgba(1, 1, 1, 0.3)), url("../images/New app.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    letter-spacing: 0.05rem;
+    color: white;
+}
+
+
+#fpimage{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    font-family: poppin;
+    align-items: center;
+    width: 82vh;
+    position: relative;
+    height: 74vh;
+    border-radius: 1rem;
+    background:  url("../images/forgotPass.png") ;
+    border: 2px solid black;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    letter-spacing: 0.05rem;
+    color: white; 
+}
+
+#image{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    font-family: poppin;
+    align-items: center;
+    width: 82vh;
+    position: relative;
+    height: 74vh;
+    border-radius: 1rem;
+    background: linear-gradient(rgba(1, 1, 1, 0.3), rgba(1, 1, 1, 0.3)), url("../images/Sign\ up.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    letter-spacing: 0.05rem;
+    color: white;
+}
+
+
+#fp{
+    color: var(--secondaryTextColor);
+    font-family: poppin;
+}
+
+.image p:first-child{
+color: var(--extraColor);
+
+}
+
+.image h1{
+font-size: 3rem;
+}
+
+.image p:last-child{
+font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

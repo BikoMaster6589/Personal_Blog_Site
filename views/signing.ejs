@@ -1,0 +1,81 @@
+<%- include('partials/header.ejs') %>
+
+<title>Signup_Section</title>
+<link rel="stylesheet" href="/styles/main_edit.css"/>
+<link rel="stylesheet" href="/styles/sign_up.css"/>
+
+
+<div class="Main">
+
+<div class="heading">
+    <h1>SIGN IN</h1>
+</div>
+
+<div class="Main_Content">
+    <div class="forms">
+        <h3>Start For Free</h3>
+        <h2>Sign In Your Account</h2>
+         <p>Not a member ? <a href="/signup">Sign up</a></p>
+ <form action="/signin" method="post" id="Jk">
+<div class="naming">
+
+</div>
+<input type="email" name="username" placeholder="Gmail">
+<input type="text" name="password" placeholder="Password">
+<a id="fp" href="/fp">Forgot Password ?</a>
+
+<button type="submit" id="signinBtn">Login</button>
+
+ </form>
+
+
+ <h3 id="ui">Or Sign In With</h3>
+ <a id="ub" href="/auth/google">
+    <img id="goog" src="/images/google.png" alt="">
+    <h3>Google</h3>
+ </a>
+
+    </div>
+    <div class="image" id="image">
+     <p>Become a Member</p>
+     <h1>Join Our Community</h1>
+     <p>and never Miss a Story</p>
+     
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    <% if (typeof showAlert !== 'undefined' && showAlert) { %>
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '<%= message %>',
+      });
+    <% } if(typeof showAlert === 'false') { %>
+      Swal.fire({
+        title: 'Error!',
+        text: '<%= message %>',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+    <% } %>
+    
+  </script>
+  
+
+<!-- Footer  -
+
+
+
+<%- include('partials/footer.ejs') %>
+
+
+
