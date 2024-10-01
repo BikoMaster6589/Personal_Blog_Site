@@ -1,0 +1,26 @@
+-- Create the users table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    username VARCHAR(100) UNIQUE,
+    hashed_password VARCHAR(100),
+    feedback VARCHAR(255)  -- Increased length for feedback
+);
+
+-- Create the posts table
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,  -- Foreign key with cascade option
+    heading VARCHAR(100),
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Use TIMESTAMP for more precise tracking
+    image TEXT
+);
+
+
+CREATE TABLE sessions (
+sid VARCHAR(255) PRIMARY KEY,
+sess JSONB,
+expire TIMESTAMPTZ NOT NULL
+);

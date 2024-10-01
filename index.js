@@ -6,7 +6,9 @@ import env from "dotenv";
 import multer from "multer";
 import methodOverride from "method-override";
 import Swal from "sweetalert2";
+import connectPgSimple from "connect-pg-simple";
 import nodemailer from "nodemailer";
+
 
 // For hashing passwords
 import bcrypt from "bcrypt";
@@ -19,6 +21,7 @@ import GoogleStrategy from "passport-google-oauth2"; // Renamed import for clari
 
 const port = 3000;
 const app = express();
+const PgSession = connectPgSimple(session); 
 env.config();
 
 // Middleware
@@ -30,6 +33,10 @@ app.set('view engine', 'ejs');
 
 app.use(
   session({
+    store: new PgSession({
+      pool: db, // Connection pool
+      tableName: 'sessions', // Table name to store session data
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
