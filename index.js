@@ -274,7 +274,7 @@ app.get(
 );
 
 app.get(
-  "/auth/google/secrets",
+  "/auth/google",
   passport.authenticate("google", {
     successRedirect: "/",
     failureRedirect: "/signin",
