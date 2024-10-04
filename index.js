@@ -42,7 +42,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure : true,
+      secure : false,
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
@@ -151,6 +151,9 @@ app.get("/userposts", (req, res) => {
 });
 
 
+// app.get("/posts", (req, res) => {
+//     res.render("allPosts.ejs");
+// });
 
 app.get("/contact", (req, res) => {
   res.render("contact.ejs");
@@ -214,14 +217,29 @@ app.post("/edit/:id", upload.single("image"), async (req, res) => {
 
 // Home route with authentication check
 app.get("/", async (req, res) => {
-  try {
-    if (!req.isAuthenticated()) return res.redirect("/signup");
 
-    const posts = await db.query("SELECT * FROM posts");
-    res.render("index.ejs", {
-      values: posts.rows,
-      user: req.user,
-      adm: admin(req),
+  try {
+    if (!req.isAuthenticated()) {
+      return res.redirect("/signup");
+    }
+
+    const isAdmin = admin(req, res); // Make sure `admin()` works synchronously
+
+    // Fetch posts from the database
+    db.query("SELECT * FROM posts", (err, aka) => {
+      if (err) {
+        console.error("Error fetching posts:", err);
+        return res.status(500).send("Server error");
+      }
+      console.log(aka.rows);
+      console.log(req.user);
+
+      // Render the index page with posts and user information
+      res.render("index.ejs", {
+        values: aka.rows,
+        user: req.user,
+        adm: isAdmin,
+      });
     });
   } catch (error) {
     console.error("Error in home route:", error);
@@ -280,7 +298,8 @@ app.post(
   "/signin",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: `/signin?showAlert=false&message=${encodeURIComponent("Wrong Password Sir")})`
+    failureRedirect: `/signin?showAlert=true&message=${encodeURIComponent("Wrong Password Sir")}`,
+
   })
 );
 
@@ -336,32 +355,111 @@ app.get("/delete/:id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// Render OTP Verification Page
+app.get("/verify-otp", (req, res) => {
+  if (!req.session.tempUser) {
+    return res.redirect("/signup");
+  }
+  res.render("verify-otp.ejs",{
+    name : req.session.tempUser.username
+  }); // Create this EJS view
+});
+
+
+
+
+// Handle OTP Verification
+app.post("/verify-otp", async (req, res) => {
+  const { otp } = req.body;
+
+  // Check if tempUser exists in session
+  if (!req.session.tempUser) {
+    return res.redirect("/signup");
+  }
+
+  const tempUser = req.session.tempUser;
+
+  // Verify OTP
+  if (otp === tempUser.otp) {
+    try {
+      // Hash the password
+      const hashedPass = await bcrypt.hash(tempUser.password, saltRound);
+
+      // Insert the user into the database
+await db.query(
+  "INSERT INTO users(first_name, last_name, username, password,hashed_password) VALUES ($1, $2, $3, $4, $5)",
+  [tempUser.first_name, tempUser.last_name, tempUser.username, hashedPass, tempUser.password]
+);
+
+
+      // Clear tempUser from session
+      delete req.session.tempUser;
+
+      // Optionally, auto-login the user
+      const user = {
+        first_name: tempUser.first_name,
+        last_name: tempUser.last_name,
+        username: tempUser.username,
+        // Add other user properties as needed
+      };
+      req.login(user, (err) => {
+        if (err) {
+          console.error("Error logging in user after registration:", err);
+          return res.status(500).send("Server Error");
+        }
+        res.redirect("/");
+      });
+    } catch (error) {
+      console.error("Error completing registration:", error);
+      res.status(500).send("Server Error");
+    }
+  } else {
+    res.status(400).send("Invalid OTP. Please try again.");
+  }
+});
+
+
+// Register new user
+// Register new user
 app.post("/register", async (req, res) => {
   const { fname, lname, email, password } = req.body;
 
   try {
-    // Check if the user exists
-    const userExists = await db.query("SELECT * FROM users WHERE username = $1", [email]);
-    if (userExists.rows.length > 0) {
-      return res.status(400).render('SigningUp', {
-        message: 'User already exists. Try Signing in',
-        showAlert: true
-      });
+    // Check if the email is already registered
+    const checkEmail = await db.query("SELECT * FROM users WHERE username = $1", [email]);
+    if (checkEmail.rows.length > 0) {
+        // Render the SigningUp page with a flag
+        return res.status(400).render('SigningUp', { 
+            message: 'User already exists. Try Signing in', 
+            showAlert: true // Add this flag
+        });
     }
 
-    // Generate OTP
+    // Generate a 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    req.session.tempUser = { fname, lname, email, password, otp };
+
+    // Store user data and OTP in session
+    req.session.tempUser = {
+      first_name: fname,
+      last_name: lname,
+      username: email,
+      password: password, // Store plain password temporarily; hash after OTP verification
+      otp: otp,
+    };
 
     // Send OTP via email
-    await transporter.sendMail({
-      from: `"Blog Website" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Verify Your Email",
-      text: `Your OTP is: ${otp}`,
-      html: `<b>Your OTP is <strong>${otp}</strong></b>`,
+    const info = await transporter.sendMail({
+      from: `"Blog Website" <${process.env.EMAIL_USER}>`, // sender address
+      to: email, // list of receivers
+      subject: "Your OTP Code", // Subject line
+      text: `Your OTP code is ${otp}`, // plain text body
+      html: `<b>Your OTP code is <strong>${otp}</strong></b>`, // html body
     });
 
+    console.log("OTP sent: ", info.messageId);
+
+    // Redirect to OTP verification page
     res.redirect("/verify-otp");
   } catch (error) {
     console.error("Error during registration:", error);
@@ -369,44 +467,15 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// OTP Verification page
-app.get("/verify-otp", (req, res) => {
-  if (!req.session.tempUser) return res.redirect("/signup");
-  res.render("verify-otp", { name: req.session.tempUser.email });
-});
 
-// Handle OTP Verification
-app.post("/verify-otp", async (req, res) => {
-  const { otp } = req.body;
-  const { tempUser } = req.session;
-
-  if (!tempUser || otp !== tempUser.otp) {
-    return res.status(400).send("Invalid OTP. Please try again.");
-  }
-
-  try {
-    const hashedPass = await bcrypt.hash(tempUser.password, saltRounds);
-    await db.query(
-      "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)",
-      [tempUser.fname, tempUser.lname, tempUser.email, hashedPass]
-    );
-    delete req.session.tempUser;
-    req.login(tempUser, (err) => {
-      if (err) return res.status(500).send("Server Error");
-      res.redirect("/");
-    });
-  } catch (error) {
-    console.error("Error completing registration:", error);
-    res.status(500).send("Server Error");
-  }
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something went wrong!");
-});
-
+// Register new post
+// Function to format date as YYYY-MM-DD
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 // Register new post
 app.post("/adding", upload.single("image"), async (req, res) => {
@@ -415,11 +484,12 @@ app.post("/adding", upload.single("image"), async (req, res) => {
   const name = req.user.first_name + " " + req.user.last_name;
   const idd = req.user.id;
   const filePath = req.file.filename; // Ensure this points to the correct file path
+  const created_at = formatDate(new Date()); // Format the current date
 
   try {
       await db.query(
-          "INSERT INTO posts(userid, heading, content, userName, image) VALUES ($1, $2, $3, $4, $5)",
-          [idd, heading, content, name, filePath]
+          "INSERT INTO posts(userid, heading, content, created_at, image,username) VALUES ($1, $2, $3, $4, $5,$6)",
+          [idd, heading, content, created_at, filePath,name] // Use the formatted date here
       );
 
       // Redirect to the home page with a success indicator
@@ -430,6 +500,7 @@ app.post("/adding", upload.single("image"), async (req, res) => {
       res.redirect("/?postAdded=false");
   }
 });
+
 
 
 // Register post for user

@@ -36,11 +36,11 @@
 
 
 
- <h3 id="ui">Or Sign Up With</h3>
+ <!-- <h3 id="ui">Or Sign Up With</h3>
  <a id="ub" href="/auth/google">
     <img id="goog" src="/images/google.png" alt="Google">
     <h3>Google</h3>
- </a>
+ </a> -->
 
     </div>
     <div class="image">
@@ -70,7 +70,14 @@
                 // Redirect to the Sign-In page after acknowledging the alert
                 window.location.href = '/signin'; // Change to your sign-in route
             }
-        });
+        }).then(() => {
+      // Remove the query parameter from the URL after displaying the alert
+      if (window.history.replaceState) {
+        const url = new URL(window.location);
+        url.searchParams.delete('showAlert');
+        window.history.replaceState(null, '', url);
+      }
+    });
      <% } %>
 </script>
 

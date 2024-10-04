@@ -33,11 +33,11 @@
 
 
 
- <h3 id="ui">Or Sign In With</h3>
+ <!-- <h3 id="ui">Or Sign In With</h3>
  <a id="ub" href="/auth/google">
     <img id="goog" src="/images/google.png" alt="">
     <h3>Google</h3>
- </a>
+ </a> -->
 
     </div>
     <div class="image" id="image">
@@ -54,25 +54,31 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    <% if (typeof showAlert !== 'undefined' && showAlert) { %>
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: '<%= message %>',
-      });
-    <% } if(typeof showAlert === 'false') { %>
-      Swal.fire({
-        title: 'Error!',
-        text: '<%= message %>',
-        icon: 'error',
-        confirmButtonText: 'Try Again'
-      });
-    <% } %>
-    
-  </script>
+  // Check if the URL has the 'showAlert' parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const showAlert = urlParams.get('showAlert');
+  const message = urlParams.get('message');
+
+  // If 'showAlert' is true, display the alert
+  if (showAlert === 'true') {
+    swal({
+      title: "Error!",
+      text: message,
+      icon: "error",
+      button: "OK",
+    }).then(() => {
+      // Remove the query parameter from the URL after displaying the alert
+      if (window.history.replaceState) {
+        const url = new URL(window.location);
+        url.searchParams.delete('showAlert');
+        window.history.replaceState(null, '', url);
+      }
+    });
+  }
+</script>
   
 
 <!-- Footer  -
