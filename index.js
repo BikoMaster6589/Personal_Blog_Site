@@ -545,7 +545,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://personal-blog-site-13z.onrender.com/auth/google/secrets",
+      callbackURL: "https://personal-blog-site-13z.onrender.com/auth/google",
  // Use HTTP for local development
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
