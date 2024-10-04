@@ -151,9 +151,6 @@ app.get("/userposts", (req, res) => {
 });
 
 
-// app.get("/posts", (req, res) => {
-//     res.render("allPosts.ejs");
-// });
 
 app.get("/contact", (req, res) => {
   res.render("contact.ejs");
