@@ -269,13 +269,12 @@ app.get(
   })
 );
 
-app.get(
-  "/auth/google/secrets",
-  passport.authenticate("google", {
-    successRedirect: "/",
-    failureRedirect: "/signup",
-  })
-);
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/signin' }),
+  function(req, res) {
+   
+    res.redirect('/');
+  });
 
 // Callback route with HTTP
 app.get("/secrets", (req, res) => {
