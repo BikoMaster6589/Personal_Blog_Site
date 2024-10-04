@@ -211,6 +211,10 @@ app.post("/edit/:id", upload.single("image"), async (req, res) => {
   }
 });
 
+
+
+
+
 // Home route with authentication check
 app.get("/", async (req, res) => {
 
