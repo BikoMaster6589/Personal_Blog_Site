@@ -17,7 +17,8 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local"; // Renamed import for clarity
 // For Google OAuth
-import GoogleStrategy from "passport-google-oauth2"; // Renamed import for clarity
+import GoogleStrategy from "passport-google-oauth2";
+
 
 const port = 3000;
 const app = express();
@@ -41,6 +42,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
+      secure : true,
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
@@ -270,7 +272,7 @@ app.get(
 app.get(
   "/auth/google/secrets",
   passport.authenticate("google", {
-    successRedirect: "/secrets",
+    successRedirect: "/",
     failureRedirect: "/signup",
   })
 );
