@@ -107,7 +107,7 @@ To run the project locally, follow these steps:
 
 Explore the live version of the **Personal Blog Website** and experience all the features firsthand!
 
-👉 [Visit the Personal Blog Website](https://personal-blog-site-13rz.onrender.com) 👈
+👉 [Visit the Personal Blog Website](https://personal-blog-site-u46s.onrender.com/) 👈
 
 Start creating, browsing, and interacting with blog posts, and see how secure user authentication and post management work in real time.
 
