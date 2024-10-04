@@ -281,10 +281,7 @@ app.get(
   })
 );
 
-// Callback route with HTTP
-app.get("/secrets", (req, res) => {
-  res.send("hello");
-});
+
 
 app.get("/logout", (req, res, next) => {
   req.logout(function (err) {
