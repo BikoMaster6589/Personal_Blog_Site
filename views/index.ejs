@@ -55,7 +55,7 @@
                         <p><%= latestPost.content || "No content available" %></p>
                         <div class="dateetc">
                             <p>Created by: <span><%= latestPost.username %></span></p>
-                            <% const dateStr = new Date(new Date(latestPost.created_at).setDate(new Date(latestPost.created_at).getDate() + 1)).toISOString().substring(0, 10); %>
+                            <% const dateStr = new Date(new Date(latestPost.created_at).setDate(new Date(latestPost.created_at).getDate())).toISOString().substring(0, 10); %>
                             <p>Date: <span><%= dateStr %></span></p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
             <div class="latestPost2">
                 <% for (let i = 1; i < 4; i++) { %>
                     <% if (locals.values && values.length > i) { %>
-                        <% const post = values[values.length - (i + 1)]; %>
+                        <% const post = values[values.length - (i)]; %>
                         <div class="Card">
                             <img src="/images/uploads/<%= post.image %>" alt="Image not found">
                             <div class="content">
@@ -77,7 +77,7 @@
                                 <p><%= post.content || "No content available" %></p>
                                 <div class="dateetc">
                                     <p>Created by: <span><%= post.username || "Unknown" %></span></p>
-                                    <% const dateStr = new Date(new Date(post.created_at).setDate(new Date(post.created_at).getDate() + 1)).toISOString().substring(0, 10); %>
+                                    <% const dateStr = new Date(new Date(post.created_at).setDate(new Date(post.created_at).getDate())).toISOString().substring(0, 10); %>
                                     <p>Date: <span><%= dateStr %></span></p>
                                 </div>
                             </div>
