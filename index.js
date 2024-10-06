@@ -51,6 +51,10 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error stack trace
+  res.status(500).send('Something went wrong!'); // Send a generic response
+});
 
 const saltRound = 10;
 
@@ -64,6 +68,10 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`); // Removed return
   },
 });
+
+
+
+
 
 
 const upload = multer({ storage: storage });
