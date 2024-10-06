@@ -57,7 +57,7 @@ const saltRound = 10;
 import db from "./db.js";
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination : function (req, file, cb) {
     cb(null, "./public/images/uploads");
   },
   filename : function (req, file, cb) {
@@ -484,7 +484,7 @@ app.post("/adding", upload.single("image"), async (req, res) => {
   const content = req.body.feed;
   const name = req.user.first_name + " " + req.user.last_name;
   const idd = req.user.id;
-  const filePath = req.file.image; // Ensure this points to the correct file path
+  const filePath = req.file.filename; // Ensure this points to the correct file path
   const created_at = formatDate(new Date()); // Format the current date
 
   try {
