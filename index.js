@@ -51,6 +51,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use((err, req, res, next) => {
   console.error(err.stack); // Log the error stack trace
   res.status(500).send('Something went wrong!'); // Send a generic response
@@ -74,7 +75,10 @@ const storage = multer.diskStorage({
 
 
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+    storage: storage 
+    limits: { fileSize: 5 * 1024 * 1024 };
+  });
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
