@@ -57,13 +57,14 @@ const saltRound = 10;
 import db from "./db.js";
 
 const storage = multer.diskStorage({
-  destination : function (req, file, cb) {
-    cb(null, "./public/images/uploads");
+  destination: function (req, file, cb) {
+    cb(null, "./public/images/uploads"); // Ensure this folder exists
   },
-  filename : function (req, file, cb) {
-    return cb(null, `${Date.now()}-${file.originalname}`);
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`); // Removed return
   },
 });
+
 
 const upload = multer({ storage: storage });
 
