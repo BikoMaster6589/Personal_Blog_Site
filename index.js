@@ -60,7 +60,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/images/uploads");
   },
-  filename: function (req, file, cb) {
+  image: function (req, file, cb) {
     return cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
@@ -185,7 +185,7 @@ app.post("/edit/:id", upload.single("image"), async (req, res) => {
   const postId = req.params.id;
   const heading = req.body.heading;
   const content = req.body.content;
-  const filePath = req.file ? req.file.filename : null; // Check if image is uploaded
+  const filePath = req.file ? req.file.image : null; // Check if image is uploaded
 
   let query = "UPDATE posts SET heading = $1, content = $2";
   const params = [heading, content];
